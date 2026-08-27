@@ -10,7 +10,7 @@ import { SESSION_COOKIE, readSessionToken } from './auth/session';
  * filter, not the authorisation boundary.
  */
 const PUBLIC_PATHS = [
-  '/signin', '/signup', '/forgot-password', '/reset-password',
+  '/signin', '/signup', '/forgot-password', '/reset-password', '/signout',
   '/api/auth/login', '/api/auth/logout',
   '/api/auth/signup/start', '/api/auth/signup/verify',
   '/api/auth/forgot-password', '/api/auth/reset-password',
