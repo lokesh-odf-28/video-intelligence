@@ -12,7 +12,13 @@ function serialize(value: string, maxAge: number): string {
     'SameSite=Lax',
     `Max-Age=${maxAge}`,
   ];
-  if (process.env.NODE_ENV === 'production') parts.push('Secure');
+  // Secure by default in production. Set SESSION_COOKIE_SECURE=false when the
+  // deployment is served over plain HTTP — browsers silently drop a `Secure`
+  // cookie sent over http, which would break the session on every request.
+  const secure = process.env.SESSION_COOKIE_SECURE
+    ? process.env.SESSION_COOKIE_SECURE === 'true'
+    : process.env.NODE_ENV === 'production';
+  if (secure) parts.push('Secure');
   return parts.join('; ');
 }
 
